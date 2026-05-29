@@ -33,8 +33,8 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    padding: 40px 24px 48px;
+    justify-content: flex-start;
+    padding: 48px 24px 60px;
     overflow-y: auto;
     overflow-x: hidden;
   }
@@ -131,6 +131,8 @@
     position: relative;
     z-index: 1;
     animation: splashFadeUp 0.6s 0.3s ease both;
+    width: 100%;
+    max-width: 560px;
   }
 
   .lang-card {
@@ -1793,7 +1795,7 @@
     text-align: center; padding: 40px 20px;
     color: var(--muted); font-size: 0.85rem;
   }
-</style>
+
   .fitb-card {
     background: linear-gradient(135deg, rgba(59,130,246,0.08), rgba(124,58,237,0.06));
     border: 1px solid rgba(59,130,246,0.3);
@@ -5996,6 +5998,129 @@ console.log(`Rata-rata: ${rata}`)</textarea>
   checkStreak();
   updateXPBar();
   initChallengeState();
+
+  // ===== KAMUS ISTILAH CODING =====
+  const kamusData = [
+    // DASAR
+    { name: 'Algoritma', icon: '🧠', cat: 'dasar', tag: 'konsep', tagClass: 'tag-konsep', short: 'Langkah-langkah terurut untuk menyelesaikan masalah.', desc: 'Algoritma adalah urutan instruksi logis yang dirancang untuk menyelesaikan suatu masalah. Seperti resep masak — ada bahan, langkah, dan hasil akhir.', analogi: 'Seperti resep masak: "ambil telur → pecahkan → goreng → sajikan". Setiap langkah jelas dan berurutan.', code: '' },
+    { name: 'Program', icon: '💻', cat: 'dasar', tag: 'konsep', tagClass: 'tag-konsep', short: 'Kumpulan instruksi yang dijalankan oleh komputer.', desc: 'Program adalah sekumpulan kode yang ditulis dalam bahasa pemrograman dan dapat dieksekusi oleh komputer untuk melakukan tugas tertentu.', analogi: 'Seperti naskah film — ditulis dulu, baru "dimainkan" oleh komputer.', code: '' },
+    { name: 'Sintaks', icon: '📝', cat: 'dasar', tag: 'konsep', tagClass: 'tag-konsep', short: 'Aturan penulisan kode yang benar.', desc: 'Sintaks adalah aturan tata bahasa dalam bahasa pemrograman. Jika sintaks salah, program tidak bisa dijalankan.', analogi: 'Seperti aturan ejaan dalam bahasa Indonesia — "saya makan" benar, "makan saya saya" salah.', code: 'print("Halo")  # ✅ sintaks benar\nprint "Halo"   # ❌ sintaks salah (Python 3)' },
+    { name: 'Bug', icon: '🐛', cat: 'dasar', tag: 'konsep', tagClass: 'tag-konsep', short: 'Kesalahan dalam kode yang menyebabkan program tidak berjalan semestinya.', desc: 'Bug adalah error atau kekeliruan dalam kode program. Bisa berupa syntax error, logic error, atau runtime error.', analogi: 'Seperti salah ketik di resep masak — "tambahkan 1 kg garam" padahal harusnya "1 sendok teh".', code: '' },
+    { name: 'Debugging', icon: '🔍', cat: 'dasar', tag: 'konsep', tagClass: 'tag-konsep', short: 'Proses mencari dan memperbaiki bug.', desc: 'Debugging adalah proses mengidentifikasi, menganalisis, dan memperbaiki kesalahan (bug) dalam kode program.', analogi: 'Seperti detektif yang mencari penyebab masalah, lalu memperbaikinya.', code: 'print(x)  # cetak nilai variabel untuk debug' },
+    { name: 'Compiler', icon: '⚙️', cat: 'dasar', tag: 'konsep', tagClass: 'tag-konsep', short: 'Program yang menerjemahkan kode ke bahasa mesin sebelum dijalankan.', desc: 'Compiler menerjemahkan seluruh kode sumber menjadi kode mesin sekaligus sebelum program dijalankan. Contoh: C, C++.', analogi: 'Seperti menerjemahkan seluruh buku dari Indonesia ke Inggris dulu, baru dibaca.', code: '' },
+    { name: 'Interpreter', icon: '🔄', cat: 'dasar', tag: 'konsep', tagClass: 'tag-konsep', short: 'Menjalankan kode baris per baris secara langsung.', desc: 'Interpreter membaca dan menjalankan kode satu baris demi satu baris secara langsung, tanpa perlu dikompilasi dulu. Python dan JavaScript menggunakan interpreter.', analogi: 'Seperti penerjemah lisan — menerjemahkan kalimat demi kalimat langsung saat diucapkan.', code: '' },
+
+    // DATA & VARIABEL
+    { name: 'Variabel', icon: '📦', cat: 'data', tag: 'both', tagClass: 'tag-both', short: 'Wadah untuk menyimpan data yang bisa berubah.', desc: 'Variabel adalah nama yang digunakan untuk menyimpan nilai data di memori komputer. Nilainya bisa diubah sewaktu-waktu.', analogi: 'Seperti kotak berlabel — kamu bisa isi, kosongkan, atau ganti isinya kapan saja.', code: 'nama = "Budi"      # Python\nlet nama = "Budi"  // JavaScript' },
+    { name: 'Tipe Data', icon: '🏷️', cat: 'data', tag: 'both', tagClass: 'tag-both', short: 'Jenis nilai yang disimpan: angka, teks, boolean, dll.', desc: 'Tipe data menentukan jenis nilai yang dapat disimpan dalam variabel. Tipe dasar: integer, float, string, boolean.', analogi: 'Seperti jenis wadah berbeda — toples untuk kue, botol untuk air, amplop untuk surat.', code: 'x = 10        # int\ny = 3.14      # float\nz = "halo"    # string\nb = True      # boolean' },
+    { name: 'String', icon: '🔤', cat: 'data', tag: 'both', tagClass: 'tag-both', short: 'Tipe data teks, ditulis dalam tanda kutip.', desc: 'String adalah urutan karakter (teks). Bisa berupa huruf, angka, simbol, atau spasi yang diapit tanda kutip.', analogi: 'Seperti kalung huruf — setiap manik-manik adalah satu karakter yang dirangkai.', code: 'nama = "CodePath"\npesan = \'Halo, dunia!\'\nf_str = f"Hi {nama}"' },
+    { name: 'Integer', icon: '🔢', cat: 'data', tag: 'both', tagClass: 'tag-both', short: 'Tipe data angka bulat (tanpa desimal).', desc: 'Integer adalah tipe data untuk angka bulat, baik positif maupun negatif, tanpa koma desimal.', analogi: 'Seperti menghitung jumlah orang — tidak ada "2.5 orang".', code: 'umur = 17\nsuhu = -5\njumlah = 1000' },
+    { name: 'Boolean', icon: '✅', cat: 'data', tag: 'both', tagClass: 'tag-both', short: 'Tipe data yang hanya punya dua nilai: True atau False.', desc: 'Boolean hanya memiliki dua kemungkinan nilai: True (benar) atau False (salah). Sangat sering digunakan dalam kondisi dan logika.', analogi: 'Seperti saklar lampu — hanya ON atau OFF, tidak ada posisi tengah.', code: 'sudah_login = True\nadalah_admin = False' },
+    { name: 'Konstanta', icon: '🔒', cat: 'data', tag: 'both', tagClass: 'tag-both', short: 'Variabel yang nilainya tidak berubah setelah ditetapkan.', desc: 'Konstanta adalah nilai tetap yang tidak boleh diubah selama program berjalan. Biasanya ditulis dengan huruf kapital semua.', analogi: 'Seperti kecepatan cahaya — nilainya tetap, tidak bisa diubah.', code: 'PI = 3.14159          # Python (konvensi)\nconst MAX = 100       // JavaScript' },
+
+    // KONTROL ALUR
+    { name: 'Kondisi if/else', icon: '🔀', cat: 'kontrol', tag: 'both', tagClass: 'tag-both', short: 'Menjalankan kode berbeda tergantung kondisi yang terpenuhi.', desc: 'Percabangan if/else memungkinkan program mengambil keputusan — jika kondisi benar (True), jalankan blok ini; jika tidak, jalankan blok lain.', analogi: 'Seperti rambu jalan: "Jika hujan → bawa payung, kalau tidak → pakai topi".', code: 'if nilai >= 75:\n    print("Lulus")\nelse:\n    print("Remedial")' },
+    { name: 'Loop / Perulangan', icon: '🔁', cat: 'kontrol', tag: 'both', tagClass: 'tag-both', short: 'Menjalankan blok kode berulang kali.', desc: 'Loop digunakan untuk mengulang eksekusi kode selama kondisi terpenuhi atau sejumlah iterasi tertentu. Ada dua jenis utama: for loop dan while loop.', analogi: 'Seperti alarm yang berbunyi setiap pagi — instruksi yang sama diulang setiap hari.', code: 'for i in range(5):\n    print(i)  # cetak 0,1,2,3,4\n\nwhile x > 0:\n    x -= 1' },
+    { name: 'For Loop', icon: '🔢', cat: 'kontrol', tag: 'both', tagClass: 'tag-both', short: 'Perulangan dengan jumlah iterasi yang diketahui.', desc: 'For loop digunakan ketika kamu tahu berapa kali ingin mengulang, atau ingin iterasi melalui semua item dalam koleksi.', analogi: 'Seperti memanggil absen satu per satu — kamu tahu ada 30 siswa.', code: 'for i in range(3):\n    print(i)   # 0, 1, 2\n\nfor item in ["a","b","c"]:\n    print(item)' },
+    { name: 'While Loop', icon: '♾️', cat: 'kontrol', tag: 'both', tagClass: 'tag-both', short: 'Perulangan yang berjalan selama kondisi benar.', desc: 'While loop terus berjalan selama kondisinya True. Hati-hati infinite loop jika kondisi tidak pernah menjadi False!', analogi: 'Seperti "selama lapar, makan terus" — berhenti saat kondisi berubah.', code: 'x = 5\nwhile x > 0:\n    print(x)\n    x -= 1' },
+    { name: 'Break & Continue', icon: '⏭️', cat: 'kontrol', tag: 'both', tagClass: 'tag-both', short: 'Break menghentikan loop, continue melewati iterasi saat ini.', desc: 'Break menghentikan loop sepenuhnya. Continue melewati sisa kode di iterasi saat ini dan langsung ke iterasi berikutnya.', analogi: 'Break = keluar antre. Continue = skip giliran, langsung ke orang berikutnya.', code: 'for i in range(10):\n    if i == 5: break    # berhenti di 5\n    if i % 2: continue  # skip ganjil\n    print(i)' },
+
+    // FUNGSI
+    { name: 'Fungsi', icon: '⚙️', cat: 'fungsi', tag: 'both', tagClass: 'tag-both', short: 'Blok kode yang diberi nama dan bisa dipanggil berulang kali.', desc: 'Fungsi adalah blok kode yang dapat digunakan kembali. Didefinisikan sekali, bisa dipanggil berkali-kali dengan input yang berbeda.', analogi: 'Seperti mesin kopi — masukkan biji kopi (input), keluarkan kopi (output), prosesnya sama setiap kali.', code: 'def sapa(nama):\n    return f"Halo, {nama}!"\n\nprint(sapa("Budi"))' },
+    { name: 'Parameter', icon: '📥', cat: 'fungsi', tag: 'both', tagClass: 'tag-both', short: 'Variabel input yang diterima oleh fungsi.', desc: 'Parameter adalah variabel yang didefinisikan dalam fungsi untuk menerima nilai dari pemanggil. Argumen adalah nilai aktual yang dikirim saat memanggil fungsi.', analogi: 'Seperti formulir isian — parameter adalah kolom yang disediakan, argumen adalah yang kamu isi.', code: 'def tambah(a, b):  # a, b = parameter\n    return a + b\n\ntambah(3, 5)  # 3, 5 = argumen' },
+    { name: 'Return', icon: '📤', cat: 'fungsi', tag: 'both', tagClass: 'tag-both', short: 'Mengembalikan nilai hasil dari fungsi.', desc: 'Return digunakan untuk mengembalikan nilai dari fungsi ke pemanggilnya. Setelah return dieksekusi, fungsi berhenti.', analogi: 'Seperti kasir yang mengembalikan kembalian — tugasnya selesai setelah return.', code: 'def kuadrat(x):\n    return x * x\n\nhasil = kuadrat(4)  # hasil = 16' },
+    { name: 'Rekursi', icon: '🌀', cat: 'fungsi', tag: 'both', tagClass: 'tag-both', short: 'Fungsi yang memanggil dirinya sendiri.', desc: 'Rekursi terjadi ketika sebuah fungsi memanggil dirinya sendiri. Harus ada base case (kondisi berhenti) agar tidak infinite loop.', analogi: 'Seperti cermin yang berhadapan — gambar di dalam gambar, tapi harus ada batas.', code: 'def faktorial(n):\n    if n <= 1: return 1\n    return n * faktorial(n-1)' },
+
+    // STRUKTUR DATA
+    { name: 'Array / List', icon: '📋', cat: 'struktur', tag: 'both', tagClass: 'tag-both', short: 'Kumpulan data yang tersimpan secara berurutan.', desc: 'Array (atau List di Python) adalah struktur data yang menyimpan beberapa nilai dalam satu variabel, diakses dengan indeks mulai dari 0.', analogi: 'Seperti rak buku bernomor — buku ke-0, ke-1, ke-2, dst.', code: 'buah = ["apel","manga","jeruk"]\nprint(buah[0])   # apel\nbuah.append("anggur")' },
+    { name: 'Dictionary / Object', icon: '📖', cat: 'struktur', tag: 'both', tagClass: 'tag-both', short: 'Data berbentuk pasangan kunci-nilai (key-value).', desc: 'Dictionary (Python) atau Object (JS) menyimpan data sebagai pasangan key-value. Diakses menggunakan key, bukan indeks angka.', analogi: 'Seperti kamus sungguhan — cari kata "kucing", dapat artinya.', code: 'orang = {"nama": "Budi", "umur": 17}\nprint(orang["nama"])  # Budi' },
+    { name: 'Indeks', icon: '🔢', cat: 'struktur', tag: 'both', tagClass: 'tag-both', short: 'Posisi elemen dalam array, dimulai dari 0.', desc: 'Indeks adalah nomor posisi elemen dalam array. Di hampir semua bahasa pemrograman, indeks dimulai dari 0 (bukan 1).', analogi: 'Seperti nomor lantai — lantai 0 = dasar, lantai 1 = satu tingkat di atas, dst.', code: 'huruf = ["a","b","c"]\nhuruf[0]  # "a"\nhuruf[2]  # "c"\nhuruf[-1] # "c" (dari belakang)' },
+
+    // OOP
+    { name: 'Class', icon: '🏗️', cat: 'oop', tag: 'both', tagClass: 'tag-both', short: 'Cetakan/blueprint untuk membuat objek.', desc: 'Class adalah template atau blueprint untuk membuat objek. Mendefinisikan properti (atribut) dan perilaku (method) yang dimiliki objek.', analogi: 'Seperti cetakan kue — satu cetakan bisa buat banyak kue dengan bentuk sama.', code: 'class Kucing:\n    def __init__(self, nama):\n        self.nama = nama\n    def suara(self):\n        return "Meow!"\n\nkucing1 = Kucing("Mimi")' },
+    { name: 'Objek', icon: '📦', cat: 'oop', tag: 'both', tagClass: 'tag-both', short: 'Instansi dari sebuah class dengan data nyata.', desc: 'Objek adalah hasil nyata dari sebuah class. Setiap objek punya properti dan method sendiri sesuai class-nya.', analogi: 'Kalau Class adalah cetakan kue, Objek adalah kue yang sudah jadi.', code: 'kucing1 = Kucing("Mimi")\nkucing2 = Kucing("Tom")\nprint(kucing1.nama)   # Mimi' },
+    { name: 'Method', icon: '🔧', cat: 'oop', tag: 'both', tagClass: 'tag-both', short: 'Fungsi yang didefinisikan di dalam class.', desc: 'Method adalah fungsi yang menjadi bagian dari class/objek. Method dapat mengakses dan memodifikasi data (atribut) dari objek tersebut.', analogi: 'Seperti kemampuan seseorang — "Budi bisa berlari" — berlari adalah method dari objek Budi.', code: 'class Motor:\n    def klakson(self):\n        return "Beep!"\n\nm = Motor()\nprint(m.klakson())' },
+
+    // WEB / JS
+    { name: 'DOM', icon: '🌐', cat: 'web', tag: 'js', tagClass: 'tag-js', short: 'Representasi halaman web sebagai pohon objek yang bisa dimanipulasi JS.', desc: 'DOM (Document Object Model) adalah representasi terstruktur dari halaman HTML sebagai pohon elemen. JavaScript bisa mengubah konten, style, dan struktur HTML melalui DOM.', analogi: 'Seperti pohon keluarga halaman web — setiap tag HTML adalah anggota keluarga yang bisa diubah.', code: 'document.getElementById("judul").textContent = "Halo!";\ndocument.querySelector(".btn").style.color = "red";' },
+    { name: 'Event', icon: '🖱️', cat: 'web', tag: 'js', tagClass: 'tag-js', short: 'Aksi pengguna yang bisa dideteksi oleh JavaScript.', desc: 'Event adalah sesuatu yang terjadi di halaman web: klik, ketik, scroll, hover, dll. JavaScript bisa "mendengarkan" event ini dan menjalankan kode.', analogi: 'Seperti sensor pintu — ketika ada orang masuk (event), lampu menyala (handler).', code: 'btn.addEventListener("click", () => {\n    alert("Diklik!");\n});' },
+    { name: 'Callback', icon: '📞', cat: 'web', tag: 'js', tagClass: 'tag-js', short: 'Fungsi yang dipanggil setelah proses lain selesai.', desc: 'Callback adalah fungsi yang dikirimkan sebagai argumen ke fungsi lain, dan dipanggil ketika proses tertentu selesai.', analogi: 'Seperti "telepon balik" — "kalau pesanan sudah siap, hubungi saya".', code: 'setTimeout(() => {\n    console.log("Selesai!");\n}, 1000);' },
+    { name: 'Console.log', icon: '📟', cat: 'web', tag: 'js', tagClass: 'tag-js', short: 'Mencetak output ke konsol browser untuk debugging.', desc: 'console.log() adalah fungsi JavaScript untuk menampilkan output ke konsol browser (DevTools). Sangat berguna untuk debugging.', analogi: 'Seperti print() di Python — alat utama untuk cek nilai variabel saat debug.', code: 'console.log("Halo!");\nconsole.log(variabel);\nconsole.log("Nilai:", x, y);' },
+
+    // ERROR & DEBUG
+    { name: 'SyntaxError', icon: '🚨', cat: 'error', tag: 'both', tagClass: 'tag-both', short: 'Error karena kode tidak mengikuti aturan penulisan bahasa.', desc: 'SyntaxError terjadi ketika kode melanggar aturan sintaks bahasa. Program tidak bisa dijalankan sama sekali sebelum error ini diperbaiki.', analogi: 'Seperti kalimat yang tidak tata bahasanya — "makan saya nasi" susah dimengerti.', code: '# Python SyntaxError:\nprint("Halo"   # ❌ kurang tutup kurung\nprint("Halo")  # ✅ benar' },
+    { name: 'ReferenceError', icon: '❓', cat: 'error', tag: 'js', tagClass: 'tag-js', short: 'Mengakses variabel yang belum dideklarasikan.', desc: 'ReferenceError terjadi di JavaScript ketika mencoba menggunakan variabel yang belum dideklarasikan atau di luar scope.', analogi: 'Seperti memanggil nama orang yang tidak ada di ruangan.', code: 'console.log(x); // ❌ ReferenceError\nlet x = 5;\nconsole.log(x); // ✅ 5' },
+    { name: 'TypeError', icon: '🔤', cat: 'error', tag: 'both', tagClass: 'tag-both', short: 'Operasi dilakukan pada tipe data yang tidak sesuai.', desc: 'TypeError terjadi ketika operasi atau fungsi diterapkan pada nilai dengan tipe yang salah. Misal menjumlahkan angka dengan None.', analogi: 'Seperti mencoba mengalikan kata dengan kata — tidak masuk akal secara matematis.', code: 'x = "halo"\nprint(x + 5)  # ❌ TypeError\nprint(x + str(5))  # ✅' },
+    { name: 'Indentation Error', icon: '↔️', cat: 'error', tag: 'py', tagClass: 'tag-py', short: 'Error Python karena indentasi/spasi tidak konsisten.', desc: 'IndentationError khusus Python — terjadi ketika indentasi (spasi di awal baris) tidak konsisten atau salah. Python menggunakan indentasi untuk menentukan blok kode.', analogi: 'Seperti paragraf yang tidak rata — Python sangat sensitif terhadap "jarak" kode.', code: 'if True:\nprint("salah")   # ❌ IndentationError\n\nif True:\n    print("benar")   # ✅' },
+  ];
+
+  let kamusActiveCat = 'semua';
+  let kamusSearchQuery = '';
+
+  function toggleKamus() {
+    document.getElementById('kamus-overlay').classList.toggle('open');
+    if (document.getElementById('kamus-overlay').classList.contains('open')) {
+      renderKamus();
+      document.getElementById('kamus-search').focus();
+    }
+  }
+
+  function kamusClickOutside(e) {
+    if (e.target === document.getElementById('kamus-overlay')) toggleKamus();
+  }
+
+  function kamusSetCat(cat, btn) {
+    kamusActiveCat = cat;
+    document.querySelectorAll('.kamus-cat').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    renderKamus();
+  }
+
+  function kamusFilter() {
+    kamusSearchQuery = document.getElementById('kamus-search').value.toLowerCase();
+    renderKamus();
+  }
+
+  function toggleKamusEntry(el) {
+    const detail = el.querySelector('.kamus-detail');
+    const isOpen = detail.classList.contains('open');
+    // close all
+    document.querySelectorAll('.kamus-detail.open').forEach(d => d.classList.remove('open'));
+    if (!isOpen) detail.classList.add('open');
+  }
+
+  function renderKamus() {
+    const body = document.getElementById('kamus-body');
+    const filtered = kamusData.filter(item => {
+      const matchCat = kamusActiveCat === 'semua' || item.cat === kamusActiveCat;
+      const matchSearch = !kamusSearchQuery ||
+        item.name.toLowerCase().includes(kamusSearchQuery) ||
+        item.short.toLowerCase().includes(kamusSearchQuery) ||
+        item.desc.toLowerCase().includes(kamusSearchQuery);
+      return matchCat && matchSearch;
+    });
+
+    if (filtered.length === 0) {
+      body.innerHTML = '<div class="kamus-no-result">😅 Tidak ada istilah yang cocok.<br>Coba kata kunci lain.</div>';
+      return;
+    }
+
+    body.innerHTML = filtered.map(item => `
+      <div class="kamus-entry" onclick="toggleKamusEntry(this)">
+        <div class="kamus-entry-top">
+          <div class="kamus-entry-icon" style="background:rgba(255,255,255,0.05)">${item.icon}</div>
+          <div class="kamus-entry-name">${item.name}</div>
+          <span class="kamus-entry-tag ${item.tagClass}">${item.tag === 'py' ? 'Python' : item.tag === 'js' ? 'JavaScript' : item.tag === 'both' ? 'PY & JS' : 'Konsep'}</span>
+        </div>
+        <div class="kamus-entry-short">${item.short}</div>
+        <div class="kamus-detail">
+          <div class="kamus-detail-desc">${item.desc}</div>
+          ${item.analogi ? `<div class="kamus-analogi"><div class="kamus-analogi-label">🧠 Analogi</div>${item.analogi}</div>` : ''}
+          ${item.code ? `<div class="kamus-code-label">💻 Contoh Kode</div><div class="kamus-code-ex">${item.code}</div>` : ''}
+        </div>
+      </div>
+    `).join('');
+  }
 </script>
 
 </body>
